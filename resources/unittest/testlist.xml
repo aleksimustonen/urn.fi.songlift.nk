@@ -2,7 +2,7 @@
 <testlist>
     <test name="Invoke service by identifier">
         <request>
-            <identifier>res:/songlift/helloservice/World</identifier>
+            <identifier>res:/songlift/api/World</identifier>
         </request>
         <assert>
             <stringEquals>Hello World</stringEquals>
@@ -11,8 +11,8 @@
     
     <test name="Invoke service by endpoint">
         <request>
-            <identifier>meta:songlift:helloEP</identifier>
-            <argument name="value">World</argument>
+            <identifier>meta:songlift:api</identifier>
+            <argument name="something">World</argument>
         </request>
         <assert>
             <stringEquals>Hello World</stringEquals>

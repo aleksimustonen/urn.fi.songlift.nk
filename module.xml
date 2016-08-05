@@ -23,26 +23,22 @@
         <fileset>
             <regex>res:/etc/system/SimpleDynamicImportHook.xml</regex>
         </fileset>
+        
         <mapper>
             <config>
                 <endpoint>
-                    <id>songlift:helloEP</id>
-                    <name>Hello Service</name>
-                    <description>Hello Service</description>
+                    <id>songlift:api</id>
+                    <name>Songlift API</name>
+                    <description>This is teh external API</description>
                     
-                    <grammar>res:
-                        <group name="service">/firstmodule/helloservice</group>/
-                        <group name="value">
-                            <regex type="anything"/>
-                        </group>
+                    <grammar>
+                        <simple>res:/songlift/api/{something}</simple>
                     </grammar>
                     
                     <request>
                         <identifier>active:dpml</identifier>
-                        <argument name="operator">
-                            res:/resources/endpoints/hello.dpml
-                        </argument>
-                        <argument method="as-string" name="value">arg:value</argument>
+                        <argument name="operator">res:/resources/endpoints/hello.dpml</argument>
+                        <argument method="as-string" name="value">arg:something</argument>
                     </request>
                 </endpoint>
             </config>
