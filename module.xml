@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="2.0">
+    <meta>
+        <identity>
+            <uri>urn:fi:songlift:nk</uri>
+            <version>1.0.0</version>
+        </identity>
+        
+        <info>
+            <name>Songlift</name>
+            <description>Songlift Proto</description>
+        </info>
+    </meta>
+    
+    <system>
+        <dynamic/>
+    </system>
+    
+    <rootspace
+        name="Songlift - Services"
+        public="true"
+        uri="urn:fi:songlift:nk:services">
+        <fileset>
+            <regex>res:/etc/system/SimpleDynamicImportHook.xml</regex>
+        </fileset>
+        <mapper>
+            <config>
+                <endpoint>
+                    <id>firstmodule:helloEP</id>
+                    <name>Hello Service</name>
+                    <description>Hello Service</description>
+                    
+                    <grammar>res:
+                        <group name="service">/firstmodule/helloservice</group>/
+                        <group name="value">
+                            <regex type="anything"/>
+                        </group>
+                    </grammar>
+                    
+                    <request>
+                        <identifier>active:dpml</identifier>
+                        <argument name="operator">
+                            res:/resources/endpoints/hello.dpml
+                        </argument>
+                        <argument method="as-string" name="value">arg:value</argument>
+                    </request>
+                </endpoint>
+            </config>
+            
+            <space>
+                <fileset>
+                    <regex>res:/resources/endpoints/.*</regex>
+                </fileset>
+                <fileset>
+                    <regex>res:/etc/system/LogConfig.xml</regex>
+                </fileset>
+                <import>
+                    <uri>urn:org:netkernel:lang:dpml</uri>
+                </import>
+                <import>
+                    <uri>urn:org:netkernel:lang:freemarker</uri>
+                </import>
+            </space>
+        </mapper>
+    </rootspace>
+    
+    <rootspace
+        name="Songlift - Documentation"
+        public="true"
+        uri="urn:fi:songlift:nk:documentation">
+        <fileset>
+            <regex>res:/etc/system/(Books|Docs).xml</regex>
+        </fileset>
+        
+        <fileset>
+            <regex>res:/resources/documentation/.*</regex>
+        </fileset>
+    </rootspace>
+
+    <rootspace
+        name="Songlift - Unit Tests"
+        public="true"
+        uri="urn:fi:songlift:nk:unittest">
+        <fileset>
+            <regex>res:/etc/system/Tests.xml</regex>
+        </fileset>
+        <fileset>
+            <regex>res:/resources/unittest/.*</regex>
+        </fileset>
+        
+        <endpoint>
+            <prototype>Limiter</prototype>
+            <grammar>res:/etc/
+                <regex type="anything"/>
+            </grammar>
+        </endpoint>
+        
+        <import>
+            <uri>urn:fi:songlift:nk:services</uri>
+        </import>
+        
+        <import>
+            <uri>urn:org:netkernel:ext:layer1</uri>
+            <private/>
+        </import>
+    </rootspace>
+
+</module>
