@@ -37,7 +37,7 @@
                     
                     <request>
                         <identifier>active:dpml</identifier>
-                        <argument name="operator">res:/resources/endpoints/hello.dpml</argument>
+                        <argument name="operator">res:/resources/endpoints/api.dpml</argument>
                         <argument method="as-string" name="value">arg:something</argument>
                     </request>
                 </endpoint>
