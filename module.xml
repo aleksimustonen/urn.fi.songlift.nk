@@ -27,17 +27,17 @@
         <mapper>
             <config>
                 <endpoint>
-                    <id>songlift:api</id>
+                    <id>songlift:api:rest:hello</id>
                     <name>Songlift API</name>
                     <description>This is teh external API</description>
                     
                     <grammar>
-                        <simple>res:/songlift/api/{something}</simple>
+                        <simple>res:/songlift/api/rest/hello/{something}</simple>
                     </grammar>
                     
                     <request>
                         <identifier>active:dpml</identifier>
-                        <argument name="operator">res:/resources/endpoints/api.dpml</argument>
+                        <argument name="operator">res:/resources/endpoints/api/rest/hello.dpml</argument>
                         <argument method="as-string" name="value">arg:something</argument>
                     </request>
                 </endpoint>
