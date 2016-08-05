@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testlist>
+    <test name="Invoke service by identifier">
+        <request>
+            <identifier>res:/songlift/helloservice/World</identifier>
+        </request>
+        <assert>
+            <stringEquals>Hello World</stringEquals>
+        </assert>
+    </test>
+    
+    <test name="Invoke service by endpoint">
+        <request>
+            <identifier>meta:songlift:helloEP</identifier>
+            <argument name="value">World</argument>
+        </request>
+        <assert>
+            <stringEquals>Hello World</stringEquals>
+        </assert>
+    </test>
+</testlist>

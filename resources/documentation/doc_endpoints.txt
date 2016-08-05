@@ -1,0 +1,9 @@
+{endpoint}songlift:helloEP{/endpoint}
+==Detail==
+This hello endpoint simply formats the value argument it receives and returns it as a string response.
+
+==Resource Identifier Syntax==
+The endpoint accepts requests which match the identifier syntax
+of '''res:/songlift/helloservice/ANY_OTHER_TEXT'''
+
+The '''ANY_OTHER_TEXT''' is captured as the value argument passed into the endpoint.
