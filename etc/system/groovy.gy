@@ -1,0 +1,3 @@
+message = context.source("arg:message") // as org.netkernel.mod.hds.IHDSNode
+println message
+context.createResponseFrom(message)

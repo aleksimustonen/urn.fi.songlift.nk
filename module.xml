@@ -89,9 +89,9 @@
                             </grammar>
                             <request>
                                 <identifier>active:groovy</identifier>
-                                <argument method="as-string" name="operator">res:/etc/system/groovy.gy</argument>
-                                <argument method="as-string" name="message">arg:message</argument>
-                                <argument method="as-string" name="action">arg:action</argument>
+                                <argument name="operator">res:/etc/system/groovy.gy</argument>
+                                <argument name="message">arg:message</argument>
+                                <argument name="action">arg:action</argument>
                             </request>
                         </endpoint>
                     </config>
