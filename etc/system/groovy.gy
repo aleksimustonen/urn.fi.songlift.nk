@@ -28,7 +28,15 @@ inputPayload.addArgumentByValue("body", template)
 println inputPayload.dump()
 
 println "\noutput payload"
-outputPayload = context.issueRequest(inputPayload)
+outputPayload = context.issueRequest(inputPayload) as Document
+docelement = outputPayload.getDocumentElement() as Element
+println "docelement " + docelement
+inputNodename = docelement.getTagName()
+println "inputNodename " + inputNodename
+outputNodename = inputNodename.replace("Request", "Response")
+println "outputNodename " + outputNodename
+namespace = docelement.getNamespaceURI()
+outputPayload.renameNode(docelement, namespace, outputNodename)
 println outputPayload.dump()
 
 

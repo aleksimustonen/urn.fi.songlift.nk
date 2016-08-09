@@ -3,14 +3,14 @@
     <request assignment="response">
         <identifier>active:freemarker</identifier>
         <argument name="operator">
-            <literal type="string">Hello ${value}</literal>
+            <literal type="string">Hello ${helloParam}</literal>
         </argument>
-        <argument name="value">arg:value</argument>
+        <argument name="helloParam">arg:helloParam</argument>
     </request>
     <log>
         <message>
-            <literal type="string">DPML example running with input %1</literal>
+            <literal type="string">REST HELLO DPML running with input %1</literal>
         </message>
-        <param>arg:value</param>
+        <param>arg:helloParam</param>
     </log>
 </sequence>

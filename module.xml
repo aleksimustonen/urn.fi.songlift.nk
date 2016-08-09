@@ -16,10 +16,10 @@
         <dynamic/>
     </system>
     
-    <!--<rootspace
+    <rootspace
         name="Songlift - REST Services"
         public="true"
-        uri="urn:fi:songlift:nk:services">
+        uri="urn:fi:songlift:nk:services:rest">
         <fileset>
             <regex>res:/etc/system/SimpleDynamicImportHook.xml</regex>
         </fileset>
@@ -32,13 +32,13 @@
                     <description>This is teh external REST API</description>
                     
                     <grammar>
-                        <simple>res:/songlift/api/rest/hello/{something}</simple>
+                        <simple>res:/songlift/api/rest/hello/{helloParam}</simple>
                     </grammar>
                     
                     <request>
                         <identifier>active:dpml</identifier>
                         <argument name="operator">res:/resources/endpoints/api/rest/hello.dpml</argument>
-                        <argument method="as-string" name="value">arg:something</argument>
+                        <argument method="as-string" name="helloParam">arg:helloParam</argument>
                     </request>
                 </endpoint>
             </config>
@@ -61,8 +61,8 @@
     </rootspace>-->
     
     <rootspace 
-        name="Songlift - SOAP"
-        uri="urn:fi:songlift:nk:services" 
+        name="Songlift - SOAP Services"
+        uri="urn:fi:songlift:nk:services:soap" 
         public="true">
         <fileset>
             <glob>etc/system/SimpleDynamicImportHook.xml</glob>
@@ -71,10 +71,6 @@
             <prototype>http.SOAPOverlay</prototype>
             <config>
                 <zone>res:/soap-test-server/.*</zone>
-                <!--<rewrite>
-                    <match>res:/soap-test-server/.*</match>
-                    <to>soapMessage:/$1</to>
-                </rewrite>-->
             </config>
             <space>
                 <mapper>
@@ -87,6 +83,7 @@
                                     <argument name="message" />
                                 </active>
                             </grammar>
+                            
                             <request>
                                 <identifier>active:groovy</identifier>
                                 <argument name="operator">res:/etc/system/groovy.gy</argument>
@@ -107,6 +104,18 @@
                         </import>
                         <import>
                             <uri>urn:org:netkernel:xml:core</uri>
+                        </import>
+                        <fileset>
+                            <regex>res:/resources/endpoints/.*</regex>
+                        </fileset>
+                        <fileset>
+                            <regex>res:/etc/system/LogConfig.xml</regex>
+                        </fileset>
+                        <import>
+                            <uri>urn:org:netkernel:lang:dpml</uri>
+                        </import>
+                        <import>
+                            <uri>urn:org:netkernel:lang:freemarker</uri>
                         </import>
                     </space>
                 </mapper>
@@ -158,7 +167,7 @@
         </endpoint>
         
         <import>
-            <uri>urn:fi:songlift:nk:services</uri>
+            <uri>urn:fi:songlift:nk:services:rest</uri>
         </import>
         
         <import>
