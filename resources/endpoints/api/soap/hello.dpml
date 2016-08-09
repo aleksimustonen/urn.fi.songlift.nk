@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence><!--
+<sequence>
     <request assignment="response">
-        <identifier>active:xslt</identifier>
-        <argument name="operand">arg:helloParam</argument>
-        
-        <argument name="operator">
-            <literal type="xml">
-                <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
-                    <xsl:output method="xml" />
-                    <xsl:template match="/">
-                        <helloResponse>
-                            <xsl:value-of select="." />
-                        </helloResponse>
-                    </xsl:template>
-                </xsl:stylesheet>
-            </literal>
-        </argument>
-    </request>-->
+        <identifier>active:groovy</identifier>
+        <argument name="operator">res:/resources/endpoints/api/soap/hello.groovy</argument>
+        <argument name="action">arg:action</argument>
+        <argument name="message">arg:message</argument>
+    </request>
     <log>
         <message>
-            <literal type="string">SOAP HELLO DPML running with input %1</literal>
+            <literal type="string">SOAP HELLO DPML running. SOAP Action from HTTP Header: %1</literal>
         </message>
-        <param>arg:helloParam</param>
+        <param>arg:action</param>
     </log>
 </sequence>
