@@ -6,35 +6,29 @@ import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 
-println "\nbody"
-body = context.createRequest("active:wsSOAPGetBody")
-println body.dump()
+println "\ninput message"
+inputMessage = context.source("arg:message")
+println inputMessage.dump()
 
-println "\nmessage"
-message = context.source("arg:message")
-body.addArgumentByValue("message", message)
-println message.dump()
 
-println "\ntemplate"
-DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance()
-DocumentBuilder docBuilder = docFactory.newDocumentBuilder()
-Document template = docBuilder.newDocument()
-Element rootElement = template.createElement("helloRequest")
-template.appendChild(rootElement)
-body.addArgumentByValue("body", template)
-println body.dump()
 
-println "\ndocument"
-document = context.issueRequest(body)
-println document.dump()
+println "\noutput envelope template"
+outputEnvelopeTemplate = context.createRequest("active:wsNewSOAPMessage")  //create new SOAP Envelope
+outputEnvelopeTemplate.addArgumentByValue("message", inputMessage); // set SOAP version to match the input
+println outputEnvelopeTemplate.dump()
+outputEnvelope = context.issueRequest(outputEnvelopeTemplate)
 
-println "\nnew message"
-request = context.createRequest("active:wsNewSOAPMessage")
-request.addArgumentByValue("message", message)
-doc = context.issueRequest(request) as Document
-println doc.dump()
+
+println "\noutput body"
+outputBodyTemplate = context.createRequest("active:wsSOAPAddBody"); //create new SOAP Body
+outputBodyTemplate.addArgumentByValue("body", inputMessage);  //attach content to Body
+outputBodyTemplate.addArgumentByValue("message", outputEnvelope) //attach Body to Envelope
+println outputBodyTemplate.dump()
+outputBody = context.issueRequest(outputBodyTemplate)
+
+
 
 println "\nresponse"
-response = context.createResponseFrom(doc)  as INKFResponse
+response = context.createResponseFrom(outputBody)
 println response.dump()
 response
