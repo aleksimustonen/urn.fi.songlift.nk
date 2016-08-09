@@ -67,6 +67,7 @@
         <fileset>
             <glob>etc/system/SimpleDynamicImportHook.xml</glob>
         </fileset>
+        
         <overlay>
             <prototype>http.SOAPOverlay</prototype>
             <config>
@@ -89,6 +90,37 @@
                                 <argument name="operator">res:/resources/endpoints/api/soap/hello.dpml</argument>
                                 <argument method="as-string" name="action">arg:action</argument>
                                 <argument name="message">arg:message</argument>
+                            </request>
+                        </endpoint>
+                        
+                        <endpoint>
+                            <id>xpath</id>
+                            <grammar>
+                                <active>
+                                    <identifier>active:xpath_template</identifier>
+                                    <argument name="selector"/>
+                                    <argument name="source"/>
+                                </active>
+                            </grammar>
+                            
+                            <request>
+                                <identifier>active:xpath2</identifier>
+                                <argument name="operator">arg:selector</argument>
+                                <argument name="operand">arg:source</argument>
+                                <argument name="namespaces">
+                                    <literal assignment="namespaces" type="xml">
+                                        <namespaces>
+                                            <namespace>
+                                                <prefix>s11</prefix>
+                                                <uri>http://schemas.xmlsoap.org/soap/envelope/</uri>
+                                            </namespace>
+                                            <namespace>
+                                                <prefix>s12</prefix>
+                                                <uri>http://www.w3.org/2003/05/soap-envelope</uri>
+                                            </namespace>
+                                        </namespaces>
+                                    </literal>
+                                </argument>
                             </request>
                         </endpoint>
                     </config>

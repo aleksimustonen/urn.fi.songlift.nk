@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence>
-    <literal assignment="namespaces" type="xml">
-        <namespaces>
-            <namespace>
-                <prefix>s11</prefix>
-                <uri>http://schemas.xmlsoap.org/soap/envelope/</uri>
-            </namespace>
-            <namespace>
-                <prefix>s12</prefix>
-                <uri>http://www.w3.org/2003/05/soap-envelope</uri>
-            </namespace>
-        </namespaces>
-    </literal>
+    <declare-tag name="xpath">meta:xpath</declare-tag>
     
-    <request assignment="inputEnvelope">
-        <identifier>active:xpath2</identifier>
-        <argument name="operator"><literal type="string">/*[1]</literal></argument>
-        <argument name="operand">arg:message</argument>
-        <argument name="namespaces">this:namespaces</argument>
-    </request>
+    <xpath assignment="inputEnvelope">
+        <selector><literal type="string">/*[1]</literal></selector>
+        <source>arg:message</source>
+    </xpath>
     
-    <request assignment="requestName">
-        <identifier>active:xpath2</identifier>
-        <argument name="operator"><literal type="string">(//s11:Body|/s12:Body)/local-name(*[1])</literal></argument>
-        <argument name="operand">arg:message</argument>
-        <argument name="namespaces">this:namespaces</argument>
-    </request>
+    <xpath assignment="requestName">
+        <selector><literal type="string">(//s11:Body|/s12:Body)/local-name(*[1])</literal></selector>
+        <source>arg:message</source>
+    </xpath>
     
     <request assignment="responseName">
         <identifier>active:groovy</identifier>
