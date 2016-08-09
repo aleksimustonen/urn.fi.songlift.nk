@@ -86,7 +86,7 @@
                             
                             <request>
                                 <identifier>active:groovy</identifier>
-                                <argument name="operator">res:/etc/system/groovy.gy</argument>
+                                <argument name="operator">res:/resources/endpoints/api/soap/groovy.gy</argument>
                                 <argument name="message">arg:message</argument>
                                 <argument name="action">arg:action</argument>
                             </request>
