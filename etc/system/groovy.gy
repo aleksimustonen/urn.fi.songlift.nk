@@ -1,3 +1,40 @@
-message = context.source("arg:message") // as org.netkernel.mod.hds.IHDSNode
-println message
-context.createResponseFrom(message)
+import org.netkernel.layer0.nkf.INKFResponse
+import org.netkernel.layer0.representation.ByteArrayRepresentation
+
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.parsers.DocumentBuilderFactory
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+
+println "\nbody"
+body = context.createRequest("active:wsSOAPGetBody")
+println body.dump()
+
+println "\nmessage"
+message = context.source("arg:message")
+body.addArgumentByValue("message", message)
+println message.dump()
+
+println "\ntemplate"
+DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance()
+DocumentBuilder docBuilder = docFactory.newDocumentBuilder()
+Document template = docBuilder.newDocument()
+Element rootElement = template.createElement("helloRequest")
+template.appendChild(rootElement)
+body.addArgumentByValue("body", template)
+println body.dump()
+
+println "\ndocument"
+document = context.issueRequest(body)
+println document.dump()
+
+println "\nnew message"
+request = context.createRequest("active:wsNewSOAPMessage")
+request.addArgumentByValue("message", message)
+doc = context.issueRequest(request) as Document
+println doc.dump()
+
+println "\nresponse"
+response = context.createResponseFrom(doc)  as INKFResponse
+println response.dump()
+response
