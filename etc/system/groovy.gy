@@ -11,6 +11,28 @@ inputMessage = context.source("arg:message")
 println inputMessage.dump()
 
 
+println "\ntemplate"
+DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance()
+DocumentBuilder docBuilder = docFactory.newDocumentBuilder()
+Document template = docBuilder.newDocument()
+Element rootElement = template.createElement("helloRequest")
+template.appendChild(rootElement)
+println template.dump()
+
+
+
+println "\ninput payload"
+inputPayload = context.createRequest("active:wsSOAPGetBody")
+inputPayload.addArgumentByValue("message", inputMessage)
+inputPayload.addArgumentByValue("body", template)
+println inputPayload.dump()
+
+println "\noutput payload"
+outputPayload = context.issueRequest(inputPayload)
+println outputPayload.dump()
+
+
+
 
 println "\noutput envelope template"
 outputEnvelopeTemplate = context.createRequest("active:wsNewSOAPMessage")  //create new SOAP Envelope
@@ -21,7 +43,7 @@ outputEnvelope = context.issueRequest(outputEnvelopeTemplate)
 
 println "\noutput body"
 outputBodyTemplate = context.createRequest("active:wsSOAPAddBody"); //create new SOAP Body
-outputBodyTemplate.addArgumentByValue("body", inputMessage);  //attach content to Body
+outputBodyTemplate.addArgumentByValue("body", outputPayload);  //attach content to Body
 outputBodyTemplate.addArgumentByValue("message", outputEnvelope) //attach Body to Envelope
 println outputBodyTemplate.dump()
 outputBody = context.issueRequest(outputBodyTemplate)
