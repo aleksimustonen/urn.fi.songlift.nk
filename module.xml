@@ -71,7 +71,7 @@
         <overlay>
             <prototype>http.SOAPOverlay</prototype>
             <config>
-                <zone>res:/soap-test-server/.*</zone>
+                <zone>res:/songlift/api/soap/.*</zone>
             </config>
             <space>
                 <mapper>
@@ -79,7 +79,7 @@
                         <endpoint>
                             <grammar>
                                 <active>
-                                    <identifier>soapMessage:/soap-test-server/test1</identifier>
+                                    <identifier>soapMessage:/songlift/api/soap/hello</identifier>
                                     <argument name="action" />
                                     <argument name="message" />
                                 </active>
